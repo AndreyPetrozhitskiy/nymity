@@ -1,0 +1,69 @@
+@import "../variables";
+.AuthForm {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  &-short {
+    width: 45%;
+    height: 40px;
+    display: flex;
+    color: #ffffff;
+  }
+}
+.AuthForm,
+.AuthForm-short {
+  display: flex;
+  align-items: center;
+  .base {
+    width: 100%;
+    height: 40px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #939393; // Бордер только снизу
+    background-color: rgba(255, 255, 255, 0);
+    color: #ffffff;
+    font-size: 16px;
+    margin-bottom: 10px;
+    &::placeholder {
+      color: #f2f2f2;
+      font-size: 16px;
+    }
+  }
+  p {
+    font-size: 18px;
+    color: #bdbdbd;
+    margin-left: 2%;
+    text-align: center;
+    align-items: center;
+  }
+}
+.checkbox {
+  // Убираем стандартный вид
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  // Стилизуем как кнопку или другой кастомный вид
+  width: 25px; // ширина
+  height: 25px; // высота
+  border-radius: 50%;
+  background-color: white; // цвет фона
+  border: 2px solid #939393; // граница
+  cursor: pointer; // изменение курсора при наведении
+  transition: background-color 0.3s, box-shadow 0.3s;
+  &:checked {
+    padding: 1px;
+    // Стили для состояния "выбрано"
+    background-color: $pink-color; // цвет фона при выборе
+    //   background-image: url('путь/к/вашей/иконке/галочки.svg'); // иконка галочки
+    background-repeat: no-repeat; // не повторять изображение
+    background-position: center; // центрировать изображение
+    box-shadow: inset 0 0 0 2px white;
+  }
+
+  &:focus {
+    // Стили для состояния "фокус"
+    outline: none; // убрать стандартный outline
+    // цвет границы при фокусе
+  }
+}

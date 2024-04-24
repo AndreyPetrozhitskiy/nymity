@@ -1,0 +1,28 @@
+.Feed__Container{
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    &__Content{
+        width: 1250px;
+        min-height: 100%;
+        height: auto;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        z-index: 2;
+        &-Base{
+            width: 600px;
+            height: auto;
+            min-height: 100 wh;
+            border: 1px solid #3A444C;
+            background-color: rgba(0, 0, 0, 0.87);
+            display: flex;
+
+        }
+    }
+}
+

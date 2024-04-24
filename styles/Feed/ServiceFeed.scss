@@ -1,0 +1,131 @@
+.ServiceFeed {
+  width: 250px;
+  height: 100vh;
+
+  position: sticky;
+  left: 0;
+  top: 0;
+  &__container {
+    width: 250px;
+    height: 100vh;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    &-menu {
+      width: 100%;
+      height: 450px;
+      a {
+        width: auto;
+        height: auto;
+        text-decoration: none;
+      }
+      display: flex;
+      flex-wrap: wrap;
+      &__logo {
+        width: 100%;
+          height: 40px;
+        a {
+          width: 100%;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          cursor: pointer;
+          img {
+            width: 35px;
+            height: 40px;
+          }
+          span {
+            font-size: 30px;
+            font-weight: 900;
+            color: #ffffff;
+            text-decoration: none;
+          }
+        }
+      }
+      &__buttons {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+        &-item {
+          cursor: pointer;
+          width: 100%;
+          height: 25px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          transition: 0.3s;
+
+          img {
+            width: 23px;
+            height: 23px;
+          }
+          span {
+            font-size: 20px;
+            color: #f2f2f2;
+          }
+          &:hover {
+            filter: brightness(0) saturate(100%) invert(37%) sepia(72%)
+              saturate(1206%) hue-rotate(313deg) brightness(102%) contrast(93%);
+          }
+        }
+      }
+    }
+    &-account{
+        width: 90%;
+        height: 40px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        &__picture{
+            width: 40px;
+            height: 40px;
+            background-color: #DCDCDC;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.1s ease-out;
+            img{
+                width: 40px !important;
+                height: 40px !important;
+                border-radius: 50% !important;
+                &:hover{
+                    transform: none !important;
+                }
+            }
+            &:hover{
+                outline: 2px solid #F64C72 !important;
+                transition: 0.1s ease-out !important;
+              
+            }
+        }
+        &__text{
+            display: flex;
+            flex-direction: column;
+            span:nth-of-type(1){
+                font-weight: 900;
+            }
+            span{
+                font-size: 16px;
+                color: #F2F2F2;
+            }
+        }
+        img{
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out;
+            &:hover{
+                transform: rotate(360deg);
+            }
+        }
+    }
+
+  }
+}

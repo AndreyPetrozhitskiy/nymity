@@ -1,0 +1,183 @@
+.AdsFeed {
+  width: 350px;
+  height: 800px;
+  position: sticky;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+  transition: all 0.3s ease; /* Анимация для всего компонента AdsFeed */
+
+  &__search {
+    width: 100%;
+    height: 43px;
+    cursor: pointer;
+    border-bottom: 1px solid #939393;
+    display: flex;
+    gap: 15px;
+    padding-bottom: 5px;
+    align-items: flex-end;
+    transition: all 0.3s ease; /* Анимация для элемента AdsFeed__search */
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+
+    &-input {
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      width: 90%;
+      position: relative;
+      transition: all 0.3s ease; /* Анимация для элемента AdsFeed__search-input */
+
+      input[type="text"] {
+        border: none;
+        outline: none;
+        background-color: inherit;
+        color: white;
+        transition: color 0.3s ease, background-color 0.3s ease;
+        font-size: 15px;
+      }
+
+      span {
+        color: #f2f2f2;
+        font-size: 16px;
+        user-select: none;
+        transition: color 0.3s ease, font-size 0.3s ease;
+      }
+
+      .small {
+        font-size: 12px;
+        transition: font-size 0.3s ease;
+      }
+
+      &__modal {
+        width: 100%;
+        height: 250px;
+        border-left: 1px solid #939393;
+        border-right: 1px solid #939393;
+        border-bottom: 1px solid #939393;
+        transition: all 0.3s ease; /* Анимация для элемента AdsFeed__search-input__modal */
+      }
+    }
+  }
+
+  &__recommendations {
+    width: 100%;
+    min-height: 330px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #3a444c;
+    margin-top: 30px;
+    transition: all 0.3s ease;
+    h1 {
+      width: 100%;
+      color: #f2f2f2;
+      font-size: 20px;
+      padding-bottom: 10px;
+      margin-top: 10px;
+      padding-left: 10px;
+      border-bottom: 1px solid #3a444c;
+    }
+    &-item {
+      &__base {
+        height: 70px;
+      }
+      &__big {
+        height: 85px;
+      }
+      &__big,
+      &__base {
+        width: 100%;
+        border-bottom: 1px solid #3a444c;
+        display: flex;
+        position: relative;
+        align-items: center;
+        flex-wrap: wrap;
+        img {
+          width: 50px;
+          height: 50px;
+          margin-left: 10px;
+        }
+      }
+      &__text {
+        width: auto;
+        max-width: 170px;
+        max-height: 40px;
+        height: auto;
+        display: flex;
+        color: #f2f2f2;
+        flex-direction: row;
+        flex-wrap: wrap;
+        font-size: 16px;
+        margin-left: 10px;
+        h1,
+        span {
+          width: 100%;
+          padding: 0;
+          margin: 0;
+          border: none;
+        }
+        h1 {
+          display: flex;
+          align-items: center;
+          img {
+            width: 16px;
+            height: 16px;
+            margin-left: 10px;
+          }
+        }
+        span {
+          cursor: pointer;
+        }
+      }
+      &__button {
+        width: 100px;
+        height: 25px;
+        background-color: #f64c72;
+        border-radius: 5px;
+        text-align: center;
+        color: #ffffff;
+        font-size: 13px;
+        border: none;
+        outline: none;
+        position: absolute;
+        right: 5px;
+      }
+      &__promoted {
+        width: 40%;
+        display: flex;
+        gap: 5px;
+        margin-left: 60px;
+        img {
+          width: 14px;
+          height: 13px;
+        }
+        p {
+          font-size: 13px;
+          color: #f2f2f2;
+        }
+      }
+    }
+    &-show {
+      
+      height: 50px;
+      color: #f64c72;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      margin-left:15px;
+    }
+  }
+
+  &__advertisement{
+
+  }
+
+
+}

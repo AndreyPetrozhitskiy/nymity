@@ -1,0 +1,296 @@
+@import "variables";
+
+.Registration {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: 2;
+  justify-content: end;
+  overflow-x: hidden;
+  &__flex {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    padding-top: 3%;
+    align-items: center;
+    span {
+      color: white;
+      font-size: 30px;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 5%;
+    }
+  }
+  &__Container {
+    width: 50%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.87);
+    margin-right: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &--logo {
+      width: 60%;
+      height: auto;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 2%;
+      gap: 10%;
+      img {
+        width: 130px;
+        height: 150px;
+      }
+      p {
+        color: white;
+        font-size: 64px;
+        font-weight: bold;
+      }
+    }
+    &--forms {
+      width: 60%;
+      height: 450px;
+      justify-content: normal;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &-progres_bar {
+        justify-content: center;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        .stage {
+          position: relative;
+          display: flex;
+          align-items: center;
+          transition: background-color 0.3s, color 0.3s;
+        }
+        .circle {
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+          background-color: inherit;
+          color: white;
+          display: flex;
+          border: 1px solid $pink-color;
+          font-size: 20px;
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          transition: background-color 0.3s, color 0.3s;
+        }
+
+        .stage.active .circle {
+          background-color: $pink-color;
+          color: black;
+        }
+
+        .line {
+          width: 150px;
+          height: 2px;
+          background-color: #f64c72;
+        }
+        &__input-block {
+          width: 100%;
+          height: auto;
+          color: white;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          &-license {
+            width: 100%;
+            height: 320px;
+            border: 1px solid #ffffff;
+            position: relative;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-left: 15px;
+            padding-top: 5px;
+            &::-webkit-scrollbar {
+              width: 15px;
+              background-color: #424242;
+            }
+
+            &::-webkit-scrollbar-thumb {
+              background-color: #bfbfbf;
+              border-radius: 10px;
+              border: 2px solid #bfbfbf; // Сделать ползунок немного меньше через border
+            }
+            h1 {
+              font-size: 24px !important;
+              margin-top: 2% !important;
+              margin-bottom: 3% !important;
+            }
+            h2 {
+              font-size: 22px !important;
+              margin-top: 2% !important;
+              margin-bottom: 2% !important;
+            }
+            p {
+              font-size: 20px !important;
+              margin: 0 !important;
+              margin-left: 4% !important;
+              margin-bottom: 1% !important;
+            }
+            h3 {
+              font-size: 22px !important;
+              margin-top: 2% !important;
+              margin-bottom: 2% !important;
+            }
+
+            &-check {
+              width: 100%;
+              display: flex;
+              gap: 20px;
+              .check-form {
+                opacity: 0;
+                position: absolute;
+                + label {
+                  user-select: none;
+                  display: flex;
+                  gap: 15px;
+                  color: #ffffff;
+                  font-size: 18px;
+                  text-wrap: wrap;
+                  text-align: left;
+                  margin: 0 !important;
+                  cursor: pointer;
+                  &::before {
+                    content: "";
+                    display: flex;
+                    height: 30px;
+                    width: 30px;
+                    border-radius: 4px;
+                    border: 2px solid #d1d1d1;
+                    background-color: transparent;
+                  }
+                }
+                &:checked + label::before {
+                  background-image: url("../img/arrow.png");
+
+                  background-size: 22px 22px;
+                  background-repeat: no-repeat;
+                  width: 30px;
+                  height: 30px;
+                  display: flex;
+                  text-align: center;
+                  justify-content: center;
+                  align-items: center;
+                  background-color: #f64c72;
+                  border-color: #f64c72;
+                  &::after {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 30px;
+                    height: 30px;
+                    border: solid black;
+                    border-width: 0 2px 2px 0;
+                    transform: rotate(45deg);
+                  }
+                }
+              }
+              input[type="checkbox"] {
+                width: 30px;
+                height: 30px;
+              }
+            }
+          }
+          &-text {
+            width: 100%;
+            display: flex;
+            font-size: 18px;
+            justify-content: center;
+            margin-bottom: 2%;
+            p {
+              color: #bdbdbd;
+              font-size: 18px !important;
+              margin: 0 !important;
+            }
+            a {
+              margin-left: 2%;
+              font-size: 18px !important;
+              color: #f64c72;
+              cursor: pointer;
+              text-decoration: underline;
+            }
+          }
+          button {
+            width: 100%;
+            height: 60px;
+            background-color: $pink-color;
+            text-align: center;
+            color: black;
+            font-weight: bold;
+            border-radius: 5px;
+            border: none;
+
+            // Стили для неактивной кнопки
+            &:disabled {
+              background-color: #6c757d; // Цвет фона
+              color: #ffffff; // Цвет текста
+              cursor: not-allowed; // Изменяем указатель на запрещающий
+            }
+          }
+          p {
+            font-size: 30px;
+            color: #f2f2f2;
+            margin-top: 6%;
+            margin-bottom: 3%;
+          }
+          &__two {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+          }
+        }
+      }
+      &-param {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        a {
+          font-size: 18px;
+          color: #bdbdbd;
+          text-decoration: none;
+          transition: 0.2s;
+        }
+      }
+      button {
+        width: 100%;
+        height: 60px;
+        background-color: $pink-color;
+        text-align: center;
+        color: black;
+        font-weight: bold;
+        border-radius: 5px;
+      }
+      &-text {
+        width: 100%;
+        display: flex;
+        font-size: 18px;
+        justify-content: center;
+        p {
+          color: #bdbdbd;
+        }
+        a {
+          margin-left: 2%;
+          color: $pink-color;
+          cursor: pointer;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
