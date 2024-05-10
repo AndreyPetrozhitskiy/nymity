@@ -1,0 +1,86 @@
+.AdsFeed__recommendations-item {
+   
+  &__base {
+    height: 70px;
+  }
+  &__big {
+    height: auto;
+    min-height: 85px;
+    
+  }
+  &__big,
+  &__base {
+    width: 100%;
+    border-bottom: 1px solid #3a444c;
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-wrap: wrap;
+    img {
+      width: 50px;
+      height: 50px;
+      margin-left: 10px;
+    }
+  }
+  &__text {
+    width: auto;
+    max-width: 170px;
+    max-height: 40px;
+    height: auto;
+    display: flex;
+    color: #f2f2f2;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 16px;
+    margin-left: 10px;
+    h1{
+        font-size: 19px !important;
+    }
+    h1,
+    span {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      border: none;
+    }
+    h1 {
+      display: flex;
+      align-items: center;
+      img {
+        width: 16px;
+        height: 16px;
+        margin-left: 10px;
+      }
+    }
+    span {
+      cursor: pointer;
+    }
+  }
+  &__button {
+    width: 100px;
+    height: 25px;
+    background-color: #f64c72;
+    border-radius: 5px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 13px;
+    border: none;
+    outline: none;
+    position: absolute;
+    right: 5px;
+  }
+  &__promoted {
+    width: 40%;
+    display: flex;
+    gap: 5px;
+    margin-left: 60px;
+    img {
+      width: 14px;
+      height: 13px;
+    }
+    p {
+      font-size: 13px;
+      color: #f2f2f2;
+    }
+  }
+}
