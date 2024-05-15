@@ -99,9 +99,11 @@ function Registration() {
 
     const payload = { ...userData, age: formatISODate(userData.age) };
     try {
-      const { status, token } = await registration(payload);
+      const { status, token,id,login } = await registration(payload);
       if (status) {
         Cookies.set("jwt", token, { expires: 3 });
+        Cookies.set("id", id, { expires: 3 });
+        Cookies.set("login", login, { expires: 3 });
         window.location.replace('/feed');
       }
     } catch (error) {
