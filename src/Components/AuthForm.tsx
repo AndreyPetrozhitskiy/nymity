@@ -1,6 +1,6 @@
 "use client";
 import React, { ChangeEvent } from "react";
-import "../styles/uiComponents/AuthForm.scss";
+import "../styles/Components/AuthForm.scss";
 interface AuthFormProps {
   title: string;
   type: string;
@@ -11,10 +11,10 @@ function AuthForm({ title, type, value, onChange }: AuthFormProps) {
   let className: string = "AuthForm";
   let classNameInput: string = "base";
   if (
-    title === "Name" ||
-    title === "Surname" ||
-    title === "Age" ||
-    title === "Gender" ||
+    title === "Имя" ||
+    title === "Фамилия" ||
+    title === "Дата рождения" ||
+    title === "Пол" ||
     title === "checkbox"
   )
     className = "AuthForm-short";
@@ -39,7 +39,7 @@ function AuthForm({ title, type, value, onChange }: AuthFormProps) {
         value={type !== "checkbox" ? (value as string) : undefined} // Используем value
         onChange={handleChange}
       />
-      {type === "checkbox" ? <p>Remember me</p> : undefined}
+      {type === "checkbox" ? <p>Сохранить вход</p> : undefined}
     </div>
   );
 }

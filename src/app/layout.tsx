@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Matrix from "../uiComponents/MatrixBackground";
+import Matrix from "../Components/MatrixBackground";
 import "../styles/global.scss";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { PrimeReactProvider, PrimeReactContext } from "primereact/api";

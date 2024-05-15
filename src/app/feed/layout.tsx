@@ -1,7 +1,7 @@
-import AdsFeed from "../../uiComponents/AdsFeed";
-import ServiceFeed from "../../uiComponents/ServiceFeed";
+import AdsFeed from "../../Components/AdsFeed";
+import ServiceFeed from "../../Components/ServiceFeed";
 import type { Metadata } from "next";
-import "../../styles/Feed/Feed.scss"
+import "../../styles/Feed/Feed.scss";
 export const metadata: Metadata = {
   title: "Feed",
 };

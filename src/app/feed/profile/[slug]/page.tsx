@@ -2,45 +2,70 @@ import React from "react";
 import "@/src/styles/Profile/profile.scss";
 import avatar from "@/src/img/avatar 2.png";
 import arrow from "@/src/img/icon/arrow_left.svg";
+import location from "@/src/img/icon/location.png";
+import calendar from "@/src/img/icon/calendar.png";
 import Image from "next/image";
-import Cookies from "js-cookie";
-import { Metadata } from "next";
-import { getUsers } from "@/src/api-func/profile";
+import { getUsersId } from "@/src/Func/profile";
+import Link from "next/link";
+import { formatDateToRussianMonthYear } from "@/src/Func/Data";
+import { cookies } from "next/headers";
+import { tokenCheck } from "@/src/Func/auth";
 
 type Props = {
   params: {
-    slug: string;
-    data: {
-      test: string;
-    };
+    slug: number | string;
   };
 };
 
-// export function generateMetadata({ params: { slug,data } }: Props):Promise<Metadata> {
-//   return {
-//     title: slug,
-//   }
-// }
+async function getData(slug: number | string) {
+  const result = await getUsersId(slug);
+  return result;
+}
 
-// async function getData() {
-//   const result = await getUsers();
-//   return result;
-// }
+export async function generateMetadata({ params: { slug } }: Props) {
+  const user = await getData(slug);
+  if (user) {
+    return {
+      title: `${user.name} ${user.surname}`,
+    };
+  }
+}
 
-async function Profile({ params: { slug, data } }: Props) {
+async function Profile({ params: { slug } }: Props) {
   const sign = [
     { count: 4, name: "публикации" },
     { count: 14, name: "подписчики" },
     { count: 57, name: "подписки" },
   ];
-  // const test = await getData()
-  // console.log(test);
+  let changeme: boolean = false;
+  let auth: boolean = false;
+  const cookieStore = cookies().getAll();
+
+  if (cookieStore.length > 0) {
+    if (cookieStore[0].value) {
+      await tokenCheck(cookieStore[0].value).then((response) => {
+        if (response.status) {
+          if (response.login === slug || response.id === slug) {
+            changeme = true;
+          }
+          auth = true;
+        }
+      });
+    }
+  }
+
+  const user = await getData(slug);
+
   return (
-    <div className="Profile">
+    <>
       <div className="Profile__header">
-        <Image src={arrow} alt="arrow" />
-        <p>Andrey Adnrey</p>
-        <p>Profile</p>
+        {auth && (
+          <Link href="/">
+            <Image src={arrow} alt="arrow" />
+          </Link>
+        )}
+        <p>{`${user.name} ${user.surname}`}</p>
+        {changeme ? <p>My Profile</p> : <p>Profile</p>}
       </div>
       <div className="Profile__main">
         <div className="Profile__main-avatar">
@@ -50,9 +75,11 @@ async function Profile({ params: { slug, data } }: Props) {
           </div>
           <div className="Profile__main-avatar__name">
             {/* Name и Surname */}
-            <p>Tomasz Gajda</p>
+            <p>
+              {user.name} {user.surname}
+            </p>
             {/* Login */}
-            <p>@nerooc</p>
+            <p>@{user.login}</p>
           </div>
         </div>
         <div className="Profile__main-signer">
@@ -65,15 +92,45 @@ async function Profile({ params: { slug, data } }: Props) {
         </div>
         <div className="Profile__main-description">
           <div className="Profile__main-description__text">
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry standard dummy text
-              ever since the.
-            </p>
+            <p>{user.Desc}</p>
+          </div>
+          <div className="Profile__main-description__location">
+            <div className="Profile__main-description__location-item">
+              <Image
+                style={{ width: "14px", height: "16px" }}
+                src={location}
+                alt="location"
+              />
+              <p>Kraków, Polska</p>
+            </div>
+            <div className="Profile__main-description__location-item">
+              <Image
+                style={{ width: "15px", height: "16px" }}
+                src={calendar}
+                alt="calendar"
+              />
+              <p>
+                Присоединился {"  "}
+                <b>{formatDateToRussianMonthYear(user.createdAt)}</b>
+              </p>
+            </div>
           </div>
         </div>
+        <div className="Profile__main-buttons">
+          {auth && changeme ? (
+            <>
+              <button>Редактировать профиль</button>
+              <button>Поделиться профилем</button>
+            </>
+          ) : auth ? (
+            <>
+              <button>Подписаться</button>
+              <button>Сообщение</button>
+            </>
+          ) : null}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

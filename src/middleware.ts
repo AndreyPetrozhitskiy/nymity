@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { tokenCheck } from "./api-func/auth";
+import { tokenCheck } from "./Func/auth";
 
 export function middleware(req: NextRequest) {
   const cookies = req.cookies;

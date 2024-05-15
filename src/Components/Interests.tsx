@@ -1,19 +1,22 @@
-"use client"
-import React, { useEffect, useState,ChangeEvent } from 'react';
-import '../styles/uiComponents/Interests.scss';
+"use client";
+import React, { useEffect, useState, ChangeEvent } from "react";
+import "../styles/Components/Interests.scss";
 
 type Interests = {
   id: number;
   name: string;
 };
 
-
 interface InterestsProps {
   interests: Interests[];
   selectedInterests: string[];
   onInterestChange: (interests: string[]) => void;
 }
-const Categories: React.FC<InterestsProps> = ({ interests, selectedInterests, onInterestChange }) => {
+const Categories: React.FC<InterestsProps> = ({
+  interests,
+  selectedInterests,
+  onInterestChange,
+}) => {
   const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([]);
 
   // const handleCategoryChange = (selectedItem: string) => {
@@ -26,12 +29,10 @@ const Categories: React.FC<InterestsProps> = ({ interests, selectedInterests, on
     const newSelectedInterests = selectedInterests.includes(selectedItem)
       ? selectedInterests.filter((id) => id !== selectedItem)
       : [...selectedInterests, selectedItem];
-      setSelectedCategoryIds(newSelectedInterests)
-    onInterestChange(newSelectedInterests); // Вызов функции обновления, переданной из Registration 
+    setSelectedCategoryIds(newSelectedInterests);
+    onInterestChange(newSelectedInterests); // Вызов функции обновления, переданной из Registration
   };
-  useEffect(() => {
-    console.log(selectedCategoryIds);
-  }, [selectedCategoryIds]);
+  useEffect(() => {}, [selectedCategoryIds]);
 
   return (
     <div className="categories__container">

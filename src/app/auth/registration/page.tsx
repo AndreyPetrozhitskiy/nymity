@@ -5,10 +5,10 @@ import "../../../styles/Registration.scss";
 import logo from "../../../img/logo.svg";
 import Image from "next/image";
 import Cookies from "js-cookie";
-import AuthForm from "../../../uiComponents/AuthForm";
-import Interests from "../../../uiComponents/Interests";
+import AuthForm from "../../../Components/AuthForm";
+import Interests from "../../../Components/Interests";
 import { useRouter } from "next/navigation";
-import { registration } from "@/src/api-func/auth";
+import { registration } from "@/src/Func/auth";
 
 interface UserData {
   login: string;
@@ -102,7 +102,7 @@ function Registration() {
       const { status, token } = await registration(payload);
       if (status) {
         Cookies.set("jwt", token, { expires: 3 });
-        replace("/feed");
+        window.location.replace('/feed');
       }
     } catch (error) {
       console.error(error);
@@ -141,7 +141,7 @@ function Registration() {
               <div className="Registration__Container--forms-progres_bar__input-block">
                 <p>Create an account</p>
                 <AuthForm
-                  title="Login"
+                  title="Логин"
                   type="text"
                   value={userData.login}
                   onChange={(value) => updateUserData("login", value)}
@@ -154,56 +154,56 @@ function Registration() {
                 />
                 <div className="Registration__Container--forms-progres_bar__input-block__two">
                   <AuthForm
-                    title="Name"
+                    title="Имя"
                     type="text"
                     value={userData.name}
                     onChange={(value) => updateUserData("name", value)}
                   />
                   <AuthForm
-                    title="Surname"
+                    title="Фамилия"
                     type="text"
                     value={userData.surname}
                     onChange={(value) => updateUserData("surname", value)}
                   />
                 </div>
                 <AuthForm
-                  title="Password"
+                  title="Пароль"
                   type="password"
                   value={userData.password} // Используем значение из userData для отображения
                   onChange={(value) => updateUserData("password", value)} // Обновляем только для отображения
                 />
                 <AuthForm
-                  title="Password repeat"
+                  title="Повторите пароль"
                   type="password"
                   value={repeatedPassword}
                   onChange={(value) => handleRepeatedPasswordChange(value)}
                 />
                 <div className="Registration__Container--forms-progres_bar__input-block__two">
                   <AuthForm
-                    title="Age"
+                    title="Дата рождения"
                     type="date"
                     value={userData.age}
                     onChange={(value) => updateUserData("age", value)}
                   />
                   <AuthForm
-                    title="Gender"
+                    title="Пол"
                     type="text"
                     value={userData.gender}
                     onChange={(value) => updateUserData("gender", value)}
                   />
                 </div>
                 <button onClick={() => handleStageClick(true, false)}>
-                  Continue
+                  Продолжить
                 </button>
                 <div className="Registration__Container--forms-progres_bar__input-block-text">
-                  <p>Already have an account?</p>
-                  <Link href="/auth">Authorization!</Link>
+                  <p>Уже есть аккаунт?</p>
+                  <Link href="/auth">Войти!</Link>
                 </div>
               </div>
             )}
             {activeStage === 2 && (
               <div className="Registration__Container--forms-progres_bar__input-block">
-                <p>Interests</p>
+                <p>Ваши категории</p>
                 <Interests
                   interests={[
                     { id: 1, name: "Категория 1" },
@@ -243,11 +243,11 @@ function Registration() {
                   }
                 />
                 <button onClick={() => handleStageClick(true, false)}>
-                  Continue
+                  Продолжить
                 </button>
                 <div className="Registration__Container--forms-progres_bar__input-block-text">
-                  <p>Already have an account?</p>
-                  <Link href="/auth">Authorization!</Link>
+                  <p>Уже есть аккаунт?</p>
+                  <Link href="/auth">Войти!</Link>
                 </div>
               </div>
             )}
@@ -349,12 +349,12 @@ function Registration() {
                 </div>
                 {/* <Link href="/feed"> */}
                 <button disabled={!isChecked} onClick={authRegistration}>
-                  Finish
+                  Регистрация
                 </button>
                 {/* </Link> */}
                 <div className="Registration__Container--forms-progres_bar__input-block-text">
-                  <p>Already have an account?</p>
-                  <Link href="/auth">Authorization!</Link>
+                  <p>Уже есть аккаунт?</p>
+                  <Link href="/auth">Войти!</Link>
                 </div>
               </div>
             )}

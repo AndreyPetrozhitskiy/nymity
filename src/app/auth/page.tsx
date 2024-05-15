@@ -1,11 +1,11 @@
 "use client";
-import AuthForm from "../../uiComponents/AuthForm";
+import AuthForm from "../../Components/AuthForm";
 import Cookies from "js-cookie";
 import "../../styles/Auth.scss";
 import Link from "next/link";
 import logo from "../../img/logo.svg";
 import Image from "next/image";
-import { Login } from "../../api-func/auth";
+import { Login } from "../../Func/auth";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 interface UserData {
@@ -32,13 +32,13 @@ export default function Auth() {
   // Авторизация
   const authLogin = async () => {
     if (userData.login && userData.password) {
-      await Login({login:userData.login,password: userData.password})
+      await Login({ login: userData.login, password: userData.password })
         .then((response) => {
-          console.log("auth:", response);
           if (response.status === true) {
             saveToCookie("jwt", response.token);
-
-            replace("/feed");
+            saveToCookie("id", response.id);
+            saveToCookie("login", response.login);
+            window.location.replace('/feed');
           }
         })
         .catch(function (error) {
@@ -58,13 +58,13 @@ export default function Auth() {
           <span>Welcome!</span>
           <div className="Auth__Container--forms">
             <AuthForm
-              title="Login"
+              title="Логин"
               type="text"
               value={userData.login}
               onChange={(value) => updateUserData("login", value)}
             />
             <AuthForm
-              title="Password"
+              title="Пароль"
               type="password"
               value={userData.password}
               onChange={(value) => updateUserData("password", value)}
@@ -76,14 +76,14 @@ export default function Auth() {
                 value={userData.checkbox}
                 onChange={(value) => updateUserData("checkbox", value)}
               />
-              <Link href="/feed">Forgot your password?</Link>
+              <Link href="/feed">Забыли пароль?</Link>
             </div>
 
-            <button onClick={authLogin}>Login</button>
+            <button onClick={authLogin}>Войти</button>
 
             <div className="Auth__Container--forms-text">
-              <p>No account?</p>
-              <Link href={"/auth/registration"}>Registration!</Link>
+              <p>Нет аккаунта?</p>
+              <Link href={"/auth/registration"}>Регистрация!</Link>
             </div>
           </div>
         </div>

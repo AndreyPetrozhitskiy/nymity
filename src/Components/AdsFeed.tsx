@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import "@/src/styles/uiComponents/Feed/AdsFeed.scss";
+import "@/src/styles/Components/Feed/AdsFeed.scss";
 import Image from "next/image";
 import search from "../img/icon/Search.png";
 import Incredibles from "../img/Users/incredibles.png";
@@ -8,6 +8,10 @@ import AGH from "../img/Users/AGH.png";
 import confirm from "../img/icon/confirm.png";
 import vector from "../img/icon/Vector.png";
 import RecomendationItem from "./Feed/RecomendationItem";
+import Cookies from "js-cookie";
+import { getUsersId } from "@/src/Func/profile";
+import { tokenCheck } from "@/src/Func/auth";
+
 interface ADS {
   text: string;
   confirm: boolean;
@@ -17,6 +21,19 @@ interface ADS {
 }
 
 function AdsFeed() {
+  const jwt: any = Cookies.get("jwt");
+  const [auth, setAuth] = useState(false);
+
+  useEffect(() => {
+    if (jwt) {
+      tokenCheck(jwt).then((response) => {
+        if (response.status) {
+          setAuth(true);
+        }
+      });
+    }
+  }, [jwt]);
+
   const [isSearchFormOpen, setIsSearchFormOpen] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -72,7 +89,7 @@ function AdsFeed() {
         <Image src={search} alt="search" />
         <div className="AdsFeed__search-input">
           <span className={isSearchFormOpen ? "small" : ""}>
-            Search <b>Nymity</b>
+            Поиск <b>Nymity</b>
           </span>
           {isSearchFormOpen && (
             <input
@@ -90,7 +107,7 @@ function AdsFeed() {
       {searchQuery && isSearchFormOpen && (
         <div className="AdsFeed__search-input__modal"></div>
       )}
-
+    {auth && (
       <div className="AdsFeed__recommendations">
         <h1>Recommendations for you</h1>
         {ADS.map((item, index) => (
@@ -105,6 +122,8 @@ function AdsFeed() {
         ))}
         <div className="AdsFeed__recommendations-show">Show more</div>
       </div>
+    )}
+      
       <div className="AdsFeed__advertisement"></div>
     </div>
   );

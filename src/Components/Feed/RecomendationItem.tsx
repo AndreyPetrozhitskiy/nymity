@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import confirmImg from "../../img/icon/confirm.png";
 import vector from "../../img/icon/Vector.png";
-import "@/src/styles/uiComponents/Feed/RecomendationItem.scss";
+import "@/src/styles/Components/Feed/RecomendationItem.scss";
 interface Props {
   text: string;
   confirm: boolean;

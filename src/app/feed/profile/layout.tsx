@@ -1,4 +1,4 @@
-import { getUsers } from "@/src/api-func/profile";
+import { getUsers } from "@/src/Func/profile";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
