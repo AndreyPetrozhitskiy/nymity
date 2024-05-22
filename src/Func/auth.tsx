@@ -60,14 +60,14 @@ export const registration = async ({
     return sendRequest(url, data);
   }
 };
-export const tokenCheck = async (token:string) => {
+export const tokenCheck = async (token: string) => {
   if (token) {
     const url = `${baseUrl}/auth/check`;
     try {
       const response = await fetch(url, {
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
       const data = await response.json();
       return data;

@@ -187,12 +187,17 @@ function Registration() {
                     value={userData.age}
                     onChange={(value) => updateUserData("age", value)}
                   />
+
+
                   <AuthForm
                     title="Пол"
-                    type="text"
+                    type="dropdown"
                     value={userData.gender}
                     onChange={(value) => updateUserData("gender", value)}
                   />
+
+
+                  
                 </div>
                 <button onClick={() => handleStageClick(true, false)}>
                   Продолжить

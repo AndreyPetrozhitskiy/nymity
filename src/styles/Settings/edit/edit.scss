@@ -1,0 +1,113 @@
+.Edit {
+  width: 95%;
+  display: flex;
+  height: auto;
+  flex-direction: column;
+  padding-bottom: 3%;
+  &__Preview {
+    width: 100%;
+    height: 100px;
+    border: 1px solid #3a444c;
+    border-radius: 20px;
+    margin-top: 3%;
+    display: flex;
+    align-items: center;
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 1px solid rgb(0, 0, 0);
+      overflow: hidden;
+      margin-left: 3%;
+    }
+    &-text{
+        width: 180px;
+        height: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        color: #ffffff;
+        margin-left: 3%;
+        h1{
+            font-size: 24px;
+        }
+        p{
+            font-size: 18px;
+        }
+    }
+    &-button{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 10px;
+        margin-left: 15%;
+        button{
+            outline:none ;
+            width: 150px;
+            height: 35px;
+            border: none;
+            color: white;
+            background-color: #F64C72;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+    }
+  }
+  &__change {
+    width: 100%;
+    height: auto;
+    border: 1px solid #3a444c;
+    border-radius: 20px;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    gap: 40px;
+    &-item{
+        width: 95%;
+        display: flex;
+        gap: 20px;
+        p{
+            width: 100%;
+            color: white;
+            
+        }
+    }
+    &-button{
+        width: 95%;
+        display: flex;
+        justify-content: end;
+        button{
+            width: 35%;
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid #3a444c;
+            background-color: #F64C72;
+            color: white;
+            transition: 0.2s;
+            &:hover{
+                transition: 0.2s;
+                background-color: #3a444c;
+            }
+        }
+    }
+  }
+}
+.load {
+  animation: blink 1s infinite;
+  background-color: #3a444c;
+}
+@keyframes blink {
+  0% {
+    background-color: #3a444c;
+  }
+  50% {
+    background-color: #ffffff;
+  }
+  100% {
+    background-color: #3a444c;
+  }
+}

@@ -25,10 +25,13 @@
       font-weight: bold;
     }
     p:nth-of-type(1) {
-      width: auto;
+      width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     p:nth-of-type(2) {
-      width: 60%;
+      width: 50%;
       text-align: right;
       font-size: 25px;
     }
@@ -86,7 +89,13 @@
 
       display: flex;
       justify-content: space-between;
-
+      &__load {
+        width: 85%;
+        height: 40px;
+        animation: blink 1s infinite;
+        background-color: #3a444c;
+        border-radius: 10px;
+      }
       &__item {
         width: 25%;
         height: 100%;
@@ -99,6 +108,13 @@
           text-align: center;
           font-size: 16px;
           color: #f2f2f2;
+        }
+        a{
+          width: 100%;
+          text-align: center;
+          font-size: 16px;
+          color: #f2f2f2;
+          text-decoration: none;
         }
       }
     }
@@ -142,6 +158,35 @@
       align-items: center;
       margin-top: 25px;
       gap: 30px;
+      a {
+        width: 250px;
+        height: 35px;
+        background-color: #f64c72;
+        text-align: center;
+        font-size: 18px;
+        border-radius: 10px;
+        color: white;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: pointer;
+        border: none;
+        text-decoration: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        &:hover {
+          color: white !important;
+        }
+      }
+      &__load {
+        width: 250px;
+        height: 35px;
+        animation: blink 1s infinite;
+        background-color: #3a444c;
+        border-radius: 10px;
+      }
       button {
         width: 250px;
         height: 35px;
@@ -157,5 +202,16 @@
         border: none;
       }
     }
+  }
+}
+@keyframes blink {
+  0% {
+    background-color: #3a444c;
+  }
+  50% {
+    background-color: #ffffff;
+  }
+  100% {
+    background-color: #3a444c;
   }
 }

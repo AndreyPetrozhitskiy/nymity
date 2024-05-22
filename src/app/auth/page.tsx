@@ -70,12 +70,12 @@ export default function Auth() {
               onChange={(value) => updateUserData("password", value)}
             />
             <div className="Auth__Container--forms-param">
-              <AuthForm
-                title="checkbox"
+              {/* <AuthForm
+                title="Сохранить вход"
                 type="checkbox"
                 value={userData.checkbox}
                 onChange={(value) => updateUserData("checkbox", value)}
-              />
+              /> */}
               <Link href="/feed">Забыли пароль?</Link>
             </div>
 

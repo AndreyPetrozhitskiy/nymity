@@ -18,11 +18,29 @@ import signup from "../img/icon/signup.png";
 import { getUsersId } from "@/src/Func/profile";
 import { useEffect, useState } from "react";
 import { tokenCheck } from "@/src/Func/auth";
+interface UserData {
+  Desc: string | null;
+  createdAt: string | null;
+  email: string | null;
+  gender: string | null;
+  id: number | null;
+  login: string | null;
+  name: string | null;
+  phone: string | null;
+  surname: string | null;
+  updatedAt: string | null;
+  userId: number | null;
+}
 function ServiceFeed() {
-  const login: any = Cookies.get("login");
-  const jwt: any = Cookies.get("jwt");
-  const [user, setUser] = useState(null);
+  const login = Cookies.get("login");
+  const jwt = Cookies.get("jwt");
+  const [user, setUser] = useState<UserData | null>(null);
   const [auth, setAuth] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true); // Устанавливаем isMounted в true после монтирования компонента
+  }, []);
 
   useEffect(() => {
     if (jwt) {
@@ -42,9 +60,14 @@ function ServiceFeed() {
       };
       fetchData();
     }
-  }, [auth]);
+  }, [auth, login]);
 
-  if (!auth) {
+  // Проверяем, что компонент смонтирован перед рендерингом
+  if (!isMounted) {
+    return null; // Можно вернуть индикатор загрузки, пока компонент не смонтирован
+  }
+
+  if (!auth && !jwt) {
     return (
       <div className="ServiceFeed">
         <div className="ServiceFeed__container">
@@ -79,40 +102,6 @@ function ServiceFeed() {
       </div>
     );
   }
-  if (!user && auth)
-    return (
-      <div className="ServiceFeed">
-        <div className="ServiceFeed__container">
-          <div className="ServiceFeed__container-menu">
-            <div className="ServiceFeed__container-menu__logo">
-              <Link href="/">
-                <Image src={logo} alt="logo" />
-                <span>Nymity</span>
-              </Link>
-            </div>
-
-            <div className="ServiceFeed__container-menu__buttons">
-              <div className="ServiceFeed__container-menu__buttons-loader"></div>
-
-              <div className="ServiceFeed__container-menu__buttons-loader"></div>
-
-              <div className="ServiceFeed__container-menu__buttons-loader"></div>
-
-              <div className="ServiceFeed__container-menu__buttons-loader"></div>
-
-              <div className="ServiceFeed__container-menu__buttons-loader"></div>
-
-              <div className="ServiceFeed__container-menu__buttons-loader"></div>
-            </div>
-          </div>
-          <div className="ServiceFeed__container-account">
-            <div className="ServiceFeed__container-account-loader"></div>
-
-            <Image src={settings} alt="settings" />
-          </div>
-        </div>
-      </div>
-    );
 
   if (user && auth) {
     return (
@@ -136,7 +125,6 @@ function ServiceFeed() {
               </Link>
 
               <Link
-                // href="/messages"
                 href="/"
                 className="ServiceFeed__container-menu__buttons-item"
               >
@@ -145,7 +133,6 @@ function ServiceFeed() {
               </Link>
 
               <Link
-                // href="/notifications"
                 href="/"
                 className="ServiceFeed__container-menu__buttons-item"
               >
@@ -154,8 +141,7 @@ function ServiceFeed() {
               </Link>
 
               <Link
-                // href="/friends"
-                href="/"
+                href={`/feed/info/${login}/subscribers`}
                 className="ServiceFeed__container-menu__buttons-item"
               >
                 <Image src={friends} alt="friends" />
@@ -188,16 +174,48 @@ function ServiceFeed() {
               href={`/feed/profile/${login}`}
               className="ServiceFeed__container-account__text"
             >
-              <span>Tomasz Gajda</span>
+              {/* ИМЯ */}
+              <span>
+                {user.name} {user.surname}
+              </span>
               <span>@{login}</span>
             </Link>
-
-            <Image src={settings} alt="settings" />
+            <Link href="/feed/settings">
+              <Image src={settings} alt="settings" />
+            </Link>
           </div>
         </div>
       </div>
     );
   }
+
+  return (
+    <div className="ServiceFeed">
+      <div className="ServiceFeed__container">
+        <div className="ServiceFeed__container-menu">
+          <div className="ServiceFeed__container-menu__logo">
+            <Link href="/">
+              <Image src={logo} alt="logo" />
+              <span>Nymity</span>
+            </Link>
+          </div>
+
+          <div className="ServiceFeed__container-menu__buttons">
+            <div className="ServiceFeed__container-menu__buttons-loader"></div>
+            <div className="ServiceFeed__container-menu__buttons-loader"></div>
+            <div className="ServiceFeed__container-menu__buttons-loader"></div>
+            <div className="ServiceFeed__container-menu__buttons-loader"></div>
+            <div className="ServiceFeed__container-menu__buttons-loader"></div>
+            <div className="ServiceFeed__container-menu__buttons-loader"></div>
+          </div>
+        </div>
+        <div className="ServiceFeed__container-account">
+          <div className="ServiceFeed__container-account-loader"></div>
+          <Image src={settings} alt="settings" />
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default ServiceFeed;

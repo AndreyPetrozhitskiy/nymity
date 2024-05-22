@@ -1,7 +1,6 @@
 import React from "react";
 import "@/src/styles/Profile/profile.scss";
 import avatar from "@/src/img/avatar 2.png";
-import arrow from "@/src/img/icon/arrow_left.svg";
 import location from "@/src/img/icon/location.png";
 import calendar from "@/src/img/icon/calendar.png";
 import Image from "next/image";
@@ -10,13 +9,17 @@ import Link from "next/link";
 import { formatDateToRussianMonthYear } from "@/src/Func/Data";
 import { cookies } from "next/headers";
 import { tokenCheck } from "@/src/Func/auth";
+import ProfileButtons from "@/src/Components/Feed/Profile/ProfileButtons";
+import ProfileMetrics from "@/src/Components/Feed/Profile/ProfileMetrics";
+import PrevButton from "@/src/Components/Feed/Profile/PrevButton";
 
 type Props = {
   params: {
     slug: number | string;
   };
 };
-
+// Важный момент
+export const revalidate = 10;
 async function getData(slug: number | string) {
   const result = await getUsersId(slug);
   return result;
@@ -32,18 +35,13 @@ export async function generateMetadata({ params: { slug } }: Props) {
 }
 
 async function Profile({ params: { slug } }: Props) {
-  const sign = [
-    { count: 4, name: "публикации" },
-    { count: 14, name: "подписчики" },
-    { count: 57, name: "подписки" },
-  ];
   let changeme: boolean = false;
   let auth: boolean = false;
   const cookieStore = cookies().getAll();
-
   if (cookieStore.length > 0) {
-    if (cookieStore[0].value) {
-      await tokenCheck(cookieStore[0].value).then((response) => {
+    const objToken = cookieStore.find((item) => item.name === "jwt");
+    if (objToken?.value) {
+      await tokenCheck(objToken.value).then((response) => {
         if (response.status) {
           if (response.login === slug || response.id === slug) {
             changeme = true;
@@ -55,14 +53,14 @@ async function Profile({ params: { slug } }: Props) {
   }
 
   const user = await getData(slug);
+  
+  const objToken = cookieStore.find((item) => item.name === "jwt");
 
   return (
     <>
       <div className="Profile__header">
         {auth && (
-          <Link href="/">
-            <Image src={arrow} alt="arrow" />
-          </Link>
+          <PrevButton />
         )}
         <p>{`${user.name} ${user.surname}`}</p>
         {changeme ? <p>My Profile</p> : <p>Profile</p>}
@@ -82,14 +80,9 @@ async function Profile({ params: { slug } }: Props) {
             <p>@{user.login}</p>
           </div>
         </div>
-        <div className="Profile__main-signer">
-          {sign.map((item, index) => (
-            <div className="Profile__main-signer__item" key={index}>
-              <p>{item.count}</p>
-              <p>{item.name}</p>
-            </div>
-          ))}
-        </div>
+
+        <ProfileMetrics userID={user.userId} />
+
         <div className="Profile__main-description">
           <div className="Profile__main-description__text">
             <p>{user.Desc}</p>
@@ -119,14 +112,12 @@ async function Profile({ params: { slug } }: Props) {
         <div className="Profile__main-buttons">
           {auth && changeme ? (
             <>
-              <button>Редактировать профиль</button>
+              <Link href="/feed/settings/edit">Редактировать профиль</Link>
               <button>Поделиться профилем</button>
             </>
           ) : auth ? (
-            <>
-              <button>Подписаться</button>
-              <button>Сообщение</button>
-            </>
+            // отдельный клиентский компонент
+            <ProfileButtons token={objToken?.value} userID={user.userId} />
           ) : null}
         </div>
       </div>
